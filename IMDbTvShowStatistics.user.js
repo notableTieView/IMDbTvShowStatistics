@@ -5,7 +5,7 @@
 // @description Shows season statistics for TV Shows on IMDB
 // @include     http://www.imdb.com/title/*
 // @include     http://www.imdb.com/title/*/eprate*
-// @version     1.0
+// @version     1.1
 // @grant       none
 // @license Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
 //
@@ -242,7 +242,7 @@ function addPlotsToEpRatePage() {
   width = Math.max(300, n * 30);
   addGlobalStyle('.statsHeading { margin-left:10px !important; margin-bottom:10px !important; }');
   addGlobalStyle('.statsDiv { float:left; max-width:100%; margin-top:10px; width:'.concat(width).concat('px;}'));
-  addGlobalStyle('#seasonAverage { margin-top: -3px; height: 190px; max-width:100%; width:'.concat(width).concat('px;}'));
+  addGlobalStyle('#seasonAverage { margin-top: -3px; max-width:100%; width:'.concat(width).concat('px;}'));
   addGlobalStyle('#seasonBoxPlot { margin-left: -10px; }');
   addGlobalStyle('#statisticsClear { clear:both; margin-bottom: 10px; }');
   
@@ -255,13 +255,13 @@ function addPlotsToEpRatePage() {
                             <h4>Season Statistics</h4>\
                             <div class="statsDiv">\
                               <h5 class="statsHeading">Rating Averages</h5>\
-                              <canvas id="seasonAverage"></canvas>\
+                              <canvas id="seasonAverage" height=190 width='.concat(width).concat('></canvas>\
                             </div>\
                             <div class="statsDiv">\
                               <h5 class="statsHeading">Rating Box Plots</h5>\
                               <div id="seasonBoxPlot"></div>\
                             </div>\
-                            <div id="statisticsClear">'.concat(clearDivContent).concat('</div>\
+                            <div id="statisticsClear">').concat(clearDivContent).concat('</div>\
                           </div>'
   ));
   $('div#tn15content h4').before(statisticsHtml);
