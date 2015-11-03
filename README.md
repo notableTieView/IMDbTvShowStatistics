@@ -1,4 +1,4 @@
-# IMDbTvShowsStastics
+# IMDbTvShowStatistics
 Display diagrams comparing the seasons of a TV show.
 
 This is a userScript (to be used with Greasemonkey, Tampermonkey, ...).
@@ -11,7 +11,7 @@ Specials are treated are subsumed under one special season (marked S).
 
 ## License
 This script uses third party libraries and is therefor provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
-* This script uses the following external libraries which are available under different licenses:
+This script uses the following external libraries which are available under different licenses:
 * [jQuery](https://jquery.com/) is provided under the [MIT License](https://tldrlegal.com/license/mit-license)
 * [d3](http://d3js.org/) is provided under the [BSD 3-Clause License](https://github.com/mbostock/d3/blob/master/LICENSE)
 * Chart.js (http://www.chartjs.org/) is provided under the [MIT License](http://opensource.org/licenses/MIT)
