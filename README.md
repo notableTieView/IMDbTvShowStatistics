@@ -10,7 +10,7 @@ On the latter, two diagrams are added:
 Specials are treated are subsumed under one special season (marked S).
 
 ## License
-This script uses third party libraries and is therefor provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
+This script uses third party libraries and is therefore provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
 This script uses the following external libraries which are available under different licenses:
 * [jQuery](https://jquery.com/) is provided under the [MIT License](https://tldrlegal.com/license/mit-license)
 * [d3](http://d3js.org/) is provided under the [BSD 3-Clause License](https://github.com/mbostock/d3/blob/master/LICENSE)
