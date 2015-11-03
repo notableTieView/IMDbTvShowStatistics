@@ -7,7 +7,7 @@
 // @include     http://www.imdb.com/title/*/eprate*
 // @version     1.0
 // @grant       none
-// @licence Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
+// @license Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
 //
 // This script uses the following external libraries which are available under different licenses:
 // jQuery (https://jquery.com/) is provided under the MIT License https://tldrlegal.com/license/mit-license
