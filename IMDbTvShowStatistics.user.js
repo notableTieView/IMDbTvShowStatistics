@@ -26,6 +26,9 @@
 
 // compatibility
 this.$ = this.jQuery = jQuery.noConflict(true);
+
+var processedRows=0;
+
 /*
 Plot a box plot for every season (min, q1, median, q3, max)
 divId - the div to add the plot to
@@ -201,7 +204,7 @@ scoresBySeason - the hash of arrays to append the extracted rating to
 function workOnTableRow(row, scoresBySeason) {
   seasonEpisodeField = $(row).children().eq(0);
   if (seasonEpisodeField.is('th')) {
-    //return;
+    $(row).children().eq(3).before('<th>User<br/>Rank</th>');
   } else {
     seasonEpisode = $.trim(seasonEpisodeField.text());
     season = 0;
@@ -216,13 +219,16 @@ function workOnTableRow(row, scoresBySeason) {
         rating
       ];
     }
+    processedRows++;
+    $(row).children().eq(3).before('<td align="right">'.concat(processedRows).concat('</td>'));
+    $(row).children().eq(4).attr('bgcolor', '#eeeeee');
   }
 }
 /*
 Extract a hash with rating arrays for each season from the ratings table
 */
 
-function collectDataPointsBySeason() {
+function collectDataPointsBySeasonAndAddRanks() {
   scoresBySeason = {
   };
   tabRowsVar = $('#tn15content table').eq(0).find('tr');
@@ -235,8 +241,8 @@ function collectDataPointsBySeason() {
 Plot all the Charts (use on a eprate page)
 */
 
-function addPlotsToEpRatePage() {
-  var seasonData = collectDataPointsBySeason();
+function addPlotsAndRanksToEpRatePage() {
+  var seasonData = collectDataPointsBySeasonAndAddRanks();
   plotData = getPlotData(seasonData);
   n = plotData.num;
   width = Math.max(300, n * 30);
@@ -264,7 +270,7 @@ function addPlotsToEpRatePage() {
                             <div id="statisticsClear">').concat(clearDivContent).concat('</div>\
                           </div>'
   ));
-  $('div#tn15content h4').before(statisticsHtml);
+  $('div#tn15content h4').eq(0).before(statisticsHtml);
   plotChart('#seasonAverage', plotData);
   plotBoxPlot('#seasonBoxPlot', plotData, width);
 }
@@ -303,7 +309,7 @@ Run on every matching imdb page
 currURL = document.URL.split('?') [0];
 if (currURL.match(/eprate/g) != undefined) {
   // we are on an eprate page
-  addPlotsToEpRatePage();
+  addPlotsAndRanksToEpRatePage();
 } else {
   addLinkToTVShowPage(currURL);
 }
