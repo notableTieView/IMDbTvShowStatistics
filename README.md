@@ -8,6 +8,11 @@ On the latter, two diagrams are added:
 * One diagram shows a box plot (min, first quartile, median, third quartile, max) for each season.
 
 Specials are treated are subsumed under one special season (marked S).
+The table containing all episodes and their ratings, is augmented with another column (User Rank) which lists the rank of each episode.
+
+## ChangeLog
+* Version 1.1 fixed CSS Bug
+* Version 1.2 added new column User Rank
 
 ## License
 This script uses third party libraries and is therefore provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
