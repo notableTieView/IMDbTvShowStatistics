@@ -14,5 +14,5 @@ This script uses third party libraries and is therefore provided under the licen
 This script uses the following external libraries which are available under different licenses:
 * [jQuery](https://jquery.com/) is provided under the [MIT License](https://tldrlegal.com/license/mit-license)
 * [d3](http://d3js.org/) is provided under the [BSD 3-Clause License](https://github.com/mbostock/d3/blob/master/LICENSE)
-* Chart.js (http://www.chartjs.org/) is provided under the [MIT License](http://opensource.org/licenses/MIT)
+* [Chart.js](http://www.chartjs.org/) is provided under the [MIT License](http://opensource.org/licenses/MIT)
 * [Highcharts](http://shop.highsoft.com/highcharts.html) is provided by [Highsoft](http://shop.highsoft.com/) for non-commercial use under the [Creative Commons Attribution-NonCommercial 3.0 license](http://creativecommons.org/licenses/by-nc/3.0/)
