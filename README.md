@@ -2,17 +2,19 @@
 Display diagrams comparing the seasons of a TV show.
 
 This is a userScript (to be used with Greasemonkey, Tampermonkey, ...).
-On the IMDb page of a TV Show (eg. [Dr. Who](http://www.imdb.com/title/tt0436992/)), a link to the episode rating overview is added (eg. [Dr. Who episode ratings](http://www.imdb.com/title/tt0436992/eprate)).
+On the IMDb page of a TV Show (eg. [Doctor Who](http://www.imdb.com/title/tt0436992/)), a link to the episode rating overview is added (eg. [Doctor Who episode ratings](http://www.imdb.com/title/tt0436992/eprate)).
 On the latter, two diagrams are added:
 * One diagram shows the average ratings per season in a bar chart
 * One diagram shows a box plot (min, first quartile, median, third quartile, max) for each season.
 
-Specials are treated are subsumed under one special season (marked S).
+Specials are subsumed under one special season (marked S).
 The table containing all episodes and their ratings, is augmented with another column (User Rank) which lists the rank of each episode.
+The top three episodes of each season are highlighted in the table (gold, silver, bronze). The worst episode of each season is colored red.
 
 ## ChangeLog
 * Version 1.1 fixed CSS Bug
 * Version 1.2 added new column User Rank
+* Version 1.4 added highlighting of top and worst episodes
 
 ## License
 This script uses third party libraries and is therefore provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
