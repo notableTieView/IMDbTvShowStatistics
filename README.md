@@ -2,6 +2,7 @@
 Display diagrams comparing the seasons of a TV show.
 
 This is a userScript (to be used with Greasemonkey, Tampermonkey, ...).
+The script is available for installation on [Greasy Fork](https://greasyfork.org/en/users/19427-notabletieview).
 On the IMDb page of a TV Show (eg. [Doctor Who](http://www.imdb.com/title/tt0436992/)), a link to the episode rating overview is added (eg. [Doctor Who episode ratings](http://www.imdb.com/title/tt0436992/eprate)).
 On the latter, two diagrams are added:
 * One diagram shows the average ratings per season in a bar chart
