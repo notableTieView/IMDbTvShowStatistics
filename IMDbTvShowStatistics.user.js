@@ -5,7 +5,7 @@
 // @description Shows season statistics for TV Shows on IMDB
 // @include     http://www.imdb.com/title/*
 // @include     http://www.imdb.com/title/*/eprate*
-// @version     1.2
+// @version     1.4
 // @grant       none
 // @license Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
 //
@@ -101,18 +101,18 @@ q - the quartile we want: e.g. 0.25, 0.5 (median), 0.75
 */
 
 function getQuartile(q, ar) {
-  var realQ = (1 - q) * ar.length;
-  var floorQ = Math.ceil(realQ);
-  if (realQ === floorQ) {
-    if (floorQ === 0) {
-      return ar[0];
-    } else if (floorQ === ar.length) {
-      return ar[ar.length - 1];
-    } else {
-      return getAverage([ar[floorQ - 1], ar[floorQ]]);
+    var realQ = (1 - q) * ar.length;
+    var floorQ = Math.floor(realQ);
+    if (realQ === floorQ) {
+      if (floorQ === 0) {
+        return ar[0];
+      } else if (floorQ === ar.length) {
+        return ar[ar.length - 1];
+      } else {
+        return getAverage([ar[floorQ - 1], ar[floorQ]]);
+      }
     }
-  }
-  return ar[floorQ];
+    return ar[floorQ];
 }
 /*
 Transform seasonData into data structure thats easy to use for plotting
@@ -195,13 +195,76 @@ function plotChart(divId, plotData) {
   var ctx = $(divId).get(0).getContext('2d');
   new Chart(ctx).Bar(data, options);
 }
+
+/*
+Get the suffix for a title attribute 
+if the season is 0, return the title for specials,
+otherwise return the title for that season
+*/
+function getTitleSuffix(season) {
+  titleSuffix=' episode of Season '.concat(season).concat('.')
+  if (season==0) {
+    titleSuffix=' special.'
+  } 
+  return titleSuffix;
+}
+
+/*
+Add css classes to highlight the top three episodes of a season
+row - the current row in the episodes table
+season - the season of that row
+seasonScores - the extracted ratings for that season so far (including the current row)
+Since the episodes are ordered from best to worst, the first three encountered rows of a season are the top three episodes
+*/
+function colorizeTopEpisodes(row, season, seasonScores) {
+  className='#000000';
+  place='';
+  switch(seasonScores.length) {
+    case 1:
+      className='seasonBest';
+      place='best';
+      break;
+    case 2:
+      className='seasonSecond';
+      place='second best';
+      break;
+    case 3:
+      className='seasonThird';
+      place='third best';
+      break;
+    default:
+      return;
+  }
+  $(row).children().eq(0).addClass(className);
+  $(row).children().eq(0).attr('title', 'The '.concat(place).concat(getTitleSuffix(season)));
+}
+
+
+/*
+Colorize the worst Episode of each season
+* scoresBySeason - a season-to-ratings map. Needed to check that there are more than three episodes in that season
+* worstEpisodesRows - a season-to-row map. The row is that of the worst episode in a season.
+Colored is the worst episode in a season unless the season had three or less episodes (in that case, the worst episode is one of the top three and thus colored respectively):
+*/
+function colorizeWorstEpisodes(scoresBySeason, worstEpisodesRows) {
+  seasons = Object.keys(scoresBySeason);
+  seasons.forEach(function(season) {
+    if (scoresBySeason[season].length>3) {
+      row=worstEpisodesRows[season];
+      $(row).children().eq(0).addClass("seasonWorst");
+      $(row).children().eq(0).attr('title', 'The worst'.concat(getTitleSuffix(season)));
+    }
+  });
+}
+
+
 /*
 Extract the data from one table row of the ratings table
 row - the row (jquery object)
 scoresBySeason - the hash of arrays to append the extracted rating to
 */
 
-function workOnTableRow(row, scoresBySeason) {
+function workOnTableRow(row, scoresBySeason, worstEpisodesRows) {
   seasonEpisodeField = $(row).children().eq(0);
   if (seasonEpisodeField.is('th')) {
     $(row).children().eq(3).before('<th>User<br/>Rank</th>');
@@ -219,11 +282,15 @@ function workOnTableRow(row, scoresBySeason) {
         rating
       ];
     }
+    colorizeTopEpisodes(row, season, scoresBySeason[season]);
+    worstEpisodesRows[season] = row;
     processedRows++;
     $(row).children().eq(3).before('<td align="right">'.concat(processedRows).concat('</td>'));
     $(row).children().eq(4).attr('bgcolor', '#eeeeee');
   }
 }
+
+
 /*
 Extract a hash with rating arrays for each season from the ratings table
 */
@@ -231,10 +298,12 @@ Extract a hash with rating arrays for each season from the ratings table
 function collectDataPointsBySeasonAndAddRanks() {
   scoresBySeason = {
   };
+  worstEpisodesRows = {};
   tabRowsVar = $('#tn15content table').eq(0).find('tr');
   tabRowsVar.each(function () {
-    workOnTableRow(this, scoresBySeason);
+    workOnTableRow(this, scoresBySeason, worstEpisodesRows);
   });
+  colorizeWorstEpisodes(scoresBySeason, worstEpisodesRows);
   return scoresBySeason;
 }
 /*
@@ -251,6 +320,13 @@ function addPlotsAndRanksToEpRatePage() {
   addGlobalStyle('#seasonAverage { margin-top: -3px; max-width:100%; width:'.concat(width).concat('px;}'));
   addGlobalStyle('#seasonBoxPlot { margin-left: -10px; }');
   addGlobalStyle('#statisticsClear { clear:both; margin-bottom: 10px; }');
+  //addGlobalStyle('#root td.seasonBest { color: gold; background-color: #eeeeee;}');
+  //addGlobalStyle('#root td.seasonSecond { color: silver;}');
+  //addGlobalStyle('#root td.seasonThird { color: #CD7F32;}');
+  addGlobalStyle('#root td.seasonBest { background-color: gold;}');
+  addGlobalStyle('#root td.seasonSecond { background-color: silver;}');
+  addGlobalStyle('#root td.seasonThird { background-color: #CD7F32;}');
+  addGlobalStyle('#root td.seasonWorst { background-color: red;}');
   
   clearDivContent='';
   if (plotData.specials) {
