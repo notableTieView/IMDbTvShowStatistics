@@ -5,7 +5,7 @@
 // @description Shows season statistics for TV Shows on IMDB
 // @include     http://www.imdb.com/title/*
 // @include     http://www.imdb.com/title/*/eprate*
-// @version     1.4
+// @version     1.5
 // @grant       none
 // @license Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
 //
@@ -356,7 +356,7 @@ if it is a TV-Show pages
 */
 
 function addLinkToTVShowPage(linkDest) {
-  episodesHeadline = $('#maindetails_center_bottom .article h2');
+  episodesHeadline = $('#main_bottom .article h2');
   if ((episodesHeadline != undefined) && (episodesHeadline.eq(0).text() == 'Episodes')) {
     // this is a TV show
     $('#overview-top .star-box-details').eq(0).append('<br/><a href=\''.concat(linkDest).concat('eprate\'>Show Episode Ranking</a>'));
