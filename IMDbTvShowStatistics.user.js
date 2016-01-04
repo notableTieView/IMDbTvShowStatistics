@@ -5,7 +5,7 @@
 // @description Shows season statistics for TV Shows on IMDB
 // @include     http://www.imdb.com/title/*
 // @include     http://www.imdb.com/title/*/eprate*
-// @version     1.5
+// @version     1.6
 // @grant       none
 // @license Creative Commons Attribution-NonCommercial 3.0 http://creativecommons.org/licenses/by-nc/3.0/
 //
