@@ -362,6 +362,18 @@ function addLinkToTVShowPage(linkDest) {
     $('#overview-top .star-box-details').eq(0).append('<br/><a href=\''.concat(linkDest).concat('eprate\'>Show Episode Ranking</a>'));
   }
 }
+
+function addLinkToTVShowPage(linkDest) {
+  episodesHeadline = $('#main_bottom .article h2');
+  if ((episodesHeadline != undefined) && (episodesHeadline.eq(0).text() == 'Episodes')) {
+    // this is a TV show
+    ratingBox=$('#overview-top .star-box-details');
+    if (ratingBox.length == 0) {
+        ratingBox=$('.ratings_wrapper');
+    }
+    ratingBox.eq(0).append('<br/><a href=\''.concat(linkDest).concat('eprate\'>Show Episode Ranking</a>'));
+  }
+}
 /*
 Add CSS
 */
