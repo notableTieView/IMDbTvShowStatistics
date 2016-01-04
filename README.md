@@ -17,6 +17,7 @@ The top three episodes of each season are highlighted in the table (gold, silver
 * Version 1.2 added new column User Rank
 * Version 1.4 added highlighting of top and worst episodes
 * Version 1.5 adapted to new id in TV show pages
+* Version 1.6 adapted to new Layout of IMDb pages
 
 ## License
 This script uses third party libraries and is therefore provided under the license [Creative Commons Attribution-NonCommercial 3.0](http://creativecommons.org/licenses/by-nc/3.0/).
